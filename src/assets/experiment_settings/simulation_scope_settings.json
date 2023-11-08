@@ -1,0 +1,11 @@
+{
+    "dataset_split":{
+        "train": 80,
+        "test": 20,
+        "validation": 20
+    },
+    "cross_validation": {
+        "n_iterations": 30,
+        "k_folds": 10
+    }
+}

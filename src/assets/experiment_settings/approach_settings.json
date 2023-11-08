@@ -1,0 +1,11 @@
+{
+    "optimizer": "Adam",
+    "padding": "same",
+    "activation": "relu",
+    "epochs": 30,
+    "filters": 32,
+    "dropout": 0.2,
+    "learning_rate": 0.01,
+    "kernel_size": [3, 3, 3],
+    "pooling_strides": [2, 2, 2]
+}

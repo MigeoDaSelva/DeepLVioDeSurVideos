@@ -1,0 +1,7 @@
+{
+    "batch_size": 4,
+    "n_frames": 30,
+    "height": 224,
+    "width": 224,
+    "n_channels": 3
+}
