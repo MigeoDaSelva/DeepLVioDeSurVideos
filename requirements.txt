@@ -1,3 +1,4 @@
+tf-models-official
 python-dotenv
 opencv-python
 scikit-learn

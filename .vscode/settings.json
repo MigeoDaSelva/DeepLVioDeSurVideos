@@ -4,8 +4,8 @@
     // Text editor.
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
-    // Python anvronment:
-    "python.defaultInterpreterPath": "/usr/local/python/current/bin/python3",
+    // Python anvronment:0
+    "python.defaultInterpreterPath": "/bin/python",
     // Testing.
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": true,
@@ -18,32 +18,32 @@
     ],
     // Formatter.
     "black-formatter.interpreter": [
-        "/usr/local/python/current/bin/python3"
+        "/bin/python"
     ],
     "black-formatter.path": [
-        "/usr/local/py-utils/bin/black"
+        "/usr/local/bin/black"
     ],
     // Linting, Security and Docstring.
     "flake8.interpreter": [
-        "/usr/local/python/current/bin/python3"
+        "/bin/python"
     ],
     "flake8.path": [
-        "/usr/local/py-utils/bin/pydocstyle",
-        "/usr/local/py-utils/bin/bandit"
+        "/usr/local/bin/pydocstyle",
+        "/usr/local/bin/bandit"
     ],
     // Type checker.
     "mypy-type-checker.interpreter": [
-        "/usr/local/python/current/bin/python3"
+        "/bin/python"
     ],
     "mypy-type-checker.path": [
-        "/usr/local/py-utils/bin/mypy"
+        "/usr/local/bin/mypy"
     ],
     // Error and Style linter.
     "pylint.path": [
-        "/usr/local/py-utils/bin/pylint"
+        "/usr/local/bin/pylint"
     ],
     "pylint.interpreter": [
-        "/usr/local/python/current/bin/python3"
+        "/bin/python"
     ],
     // Jupyter Notebook
     "notebook.output.textLineLimit": 100,

@@ -14,4 +14,10 @@ RUN groupadd --gid $USER_GID $USERNAME \
 RUN DEBIAN_FRONTEND=noninteractive apt install -y tzdata
 RUN apt install -y software-properties-common
 
+COPY ../requirements.txt ./requirements.txt
+
+RUN pip install -r requirements.txt
+
+RUN rm -f ./requirements.txt
+
 USER $USERNAME
