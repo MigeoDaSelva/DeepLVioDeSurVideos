@@ -29,6 +29,6 @@ class Movinet(Approach):
         status.expect_partial()
         self._model = movinet_model.MovinetClassifier(
             backbone=backbone,
-            num_classes=14,
+            num_classes=2,
             name=self.__class__.__name__,
         )
