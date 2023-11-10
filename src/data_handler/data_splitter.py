@@ -67,10 +67,16 @@ class DataSplitter:
 
     def _saves_dataset_fold(self, dataset_fold: ndarray, file_name: str) -> None:
         cross_val_validation_path = settings.CROSS_VALIDATION_FILE_PATH
+        dataset_fold = self._remove_relative_part(dataset_fold)
         if not os.path.exists(f"{cross_val_validation_path}/"):
             os.makedirs(f"{cross_val_validation_path}/")
         with open(f"{cross_val_validation_path}/{file_name}.pickle", "wb") as file:
             pickle.dump(dataset_fold, file, pickle.HIGHEST_PROTOCOL)
+
+    def _remove_relative_part(self, dataset: ndarray) -> ndarray:
+        for i, path in enumerate(dataset):
+            dataset[i] = Path(f"/{path.parent.name}/{path.name}/")
+        return dataset
 
     @singledispatchmethod
     def _calculates_splits_size(self, train_size) -> None:

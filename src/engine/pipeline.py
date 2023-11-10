@@ -1,7 +1,7 @@
 from src.data_handler.dataset_factory import DatasetFactory
 from src.domain.approach.abstract_approach import Approach
 from src.data_handler.data_generator import DataGenerator
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import tensorflow as tf
 
 
@@ -12,11 +12,18 @@ class Pipeline:
     validation_dataset: DataGenerator
     dataset_factory: DatasetFactory
 
-    def run(self) -> None:
-        train_ds: tf.data.Dataset = self.dataset_factory.creates(self.train_dataset)
-        validation_ds: tf.data.Dataset = self.dataset_factory.creates(
+    _train_ds: tf.data.Dataset = field(init=False)
+    _validation_ds: tf.data.Dataset = field(init=False)
+
+    def __post_init__(self) -> None:
+        self._train_ds: tf.data.Dataset = self.dataset_factory.creates(
+            self.train_dataset
+        )
+        self._validation_ds: tf.data.Dataset = self.dataset_factory.creates(
             self.validation_dataset
         )
+
+    def run(self) -> None:
         self.approach.build()
         self.approach.compile()
-        self.approach.fit(train_ds=train_ds, validation_ds=validation_ds)
+        self.approach.fit(train_ds=self._train_ds, validation_ds=self._validation_ds)

@@ -26,7 +26,7 @@ class ApproachFactory:
             conv_activation=approach_settings.activation,
             pooling_strides=approach_settings.pooling_strides,
             loss=SparseCategoricalCrossentropy(
-                from_logits=True
+                # from_logits=True
             ),  # when don't use softmax from_logits=True
             optimizer=approach_settings.optimizer,
         )

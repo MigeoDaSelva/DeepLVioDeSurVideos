@@ -1,6 +1,6 @@
 from src.domain.approach.abstract_approach import Approach
 from sklearn.metrics import roc_auc_score
-from typing import Any, List
+from typing import List
 import tensorflow as tf
 import numpy as np
 
@@ -42,4 +42,4 @@ class ClassificationMetricsCalculator:
 
     @classmethod
     def calculate_AUC(self) -> float:
-        pass
+        return None

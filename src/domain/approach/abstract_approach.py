@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
+from tensorflow import Tensor
 import tensorflow as tf
-from typing import Any
 
 
 @dataclass
@@ -23,8 +23,8 @@ class Approach(ABC):
 
     _model: tf.keras.Model = field(init=False)
     _history: tf.keras.callbacks.History = field(init=False)
-    _actual: Any = field(init=False)
-    _predicted: Any = field(init=False)
+    _actual: Tensor = field(init=False)
+    _predicted: Tensor = field(init=False)
 
     def __post_init__(self) -> None:
         self.metrics = ["accuracy"]
@@ -60,11 +60,11 @@ class Approach(ABC):
         self._predicted = predicted
 
     @property
-    def actual(self) -> Any:
+    def actual(self) -> Tensor:
         return self._actual
 
     @property
-    def predicted(self) -> Any:
+    def predicted(self) -> Tensor:
         return self._predicted
 
     @property

@@ -121,4 +121,8 @@ class C3D(Approach):
         x = keras.layers.Dense(14)(x)
         x = keras.layers.Softmax()(x)
 
-        self._model = keras.Model(_input, x, name="C3D")
+        self._model = keras.Model(
+            _input,
+            x,
+            name=self.__class__.__name__,
+        )

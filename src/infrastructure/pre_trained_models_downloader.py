@@ -15,7 +15,7 @@ class PreTrainedModelsDownloader:
             file_path,
         )
 
-        tar = tarfile.open(file_path)
-        tar.extractall(settings.PRE_TRAINED_MODELS_PATH)
-        tar.close()
+        with tarfile.open(file_path) as tar:
+            tar.extractall(settings.PRE_TRAINED_MODELS_PATH)
+            tar.close()
         os.system(f"rm {file_path}")

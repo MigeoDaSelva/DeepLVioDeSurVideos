@@ -14,15 +14,21 @@ class Movinet(Approach):
         backbone = movinet.Movinet()
         backbone.trainable = False
 
-        model = movinet_model.MovinetClassifier(backbone=backbone, num_classes=600)
+        model = movinet_model.MovinetClassifier(
+            backbone=backbone,
+            num_classes=600,
+        )
         model.build([None, None, None, None, 3])
 
         checkpoint_path = tf.train.latest_checkpoint(
             settings.PRE_TRAINED_CHECKPOINT_PATH
         )
         checkpoint = tf.train.Checkpoint(model=model)
-        checkpoint_path = checkpoint.save(checkpoint_path)
-        checkpoint.restore(checkpoint_path)
+        status = checkpoint.restore(checkpoint_path)
+        status.assert_existing_objects_matched()
+        status.expect_partial()
         self._model = movinet_model.MovinetClassifier(
-            backbone=backbone, num_classes=14, name="Movinet"
+            backbone=backbone,
+            num_classes=14,
+            name=self.__class__.__name__,
         )

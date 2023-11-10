@@ -32,6 +32,9 @@ import tensorflow as tf
 
 @dataclass
 class ApproachSettings(SettingController):
+    fine_tuning_checkbox: Checkbox = field(
+        init=False,
+    )
     approach_dropdown: Dropdown = field(
         init=False,
     )
@@ -68,6 +71,10 @@ class ApproachSettings(SettingController):
     callbacks_accordion: Accordion = field(
         init=False,
     )
+
+    @property
+    def fine_tuning(self) -> bool:
+        return self.fine_tuning_checkbox.value
 
     @property
     def approach(self) -> Approach:
@@ -160,6 +167,7 @@ class ApproachSettings(SettingController):
 
     def show(self) -> None:
         display(
+            self.fine_tuning_checkbox,
             self.approach_dropdown,
             self.optimizer_dropdown,
             self.activation_dropdown,
@@ -174,6 +182,13 @@ class ApproachSettings(SettingController):
         )
 
     def build(self) -> None:
+        self.fine_tuning_checkbox = Checkbox(
+            value=False,
+            description="Model fine-tuning",
+            disabled=False,
+            indent=False,
+        )
+
         self.approach_dropdown = Dropdown(
             options=[
                 ("(2+1)D-CNN", Conv2Plus1D),
@@ -435,7 +450,7 @@ class ApproachSettings(SettingController):
         plot_losses_keras = VBox(
             children=[
                 Checkbox(
-                    value=False, description="Disabled", disabled=False, indent=False
+                    value=True, description="Disabled", disabled=False, indent=False
                 )
             ]
         )

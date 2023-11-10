@@ -13,7 +13,6 @@ class GraphicalResultsBuilder:
         ax = sns.heatmap(cm, annot=True, fmt="g")
         sns.set(rc={"figure.figsize": (35, 35)})
         sns.set(font_scale=5)
-        # ax.set_title(f"Matriz de confusão do {ds_type}")
         ax.set_xlabel("Ação prevista")
         ax.set_ylabel("Ação real")
         plt.xticks(rotation=90)
@@ -21,20 +20,3 @@ class GraphicalResultsBuilder:
         plt.subplots_adjust(bottom=0.2, top=0.95, left=0.2, right=1)
         ax.xaxis.set_ticklabels(labels)
         ax.yaxis.set_ticklabels(labels)
-        # plt.close()
-        # plt.cla()
-        # plt.clf()
-        # ax.pl
-        # f = ax.get_figure()
-        # f.set(xlabel="A")
-        # return
-
-        # return plt.figure()
-
-        # plt.savefig(
-        #     f"{path}/{model_name}-{ds_type}-confusion-matrix-({date.today()}).png",
-        #     dpi=60,
-        #     format="png",
-        # )
-        # plt.
-        # plt.show()

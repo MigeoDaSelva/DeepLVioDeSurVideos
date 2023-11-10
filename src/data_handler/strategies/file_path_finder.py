@@ -3,6 +3,7 @@ from src.data_handler.abstract_strategies.abstract_file_path_finder import (
     FilePathFinder,
 )
 from dataclasses import dataclass
+from configs import settings
 from pathlib import Path
 from typing import List
 import pickle
@@ -24,4 +25,7 @@ class FilePathFinderByLoad(FilePathFinder):
     def finds(self, path: Path) -> List[Path]:
         with open(path, "rb") as file:
             data = pickle.load(file)
-        return list(data)
+        return list(
+            Path(f"{settings.DATASETS_PATH}/{settings.DATASET_NAME}/{path}")
+            for path in list(data)
+        )

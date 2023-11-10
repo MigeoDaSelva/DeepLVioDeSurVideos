@@ -127,4 +127,8 @@ class C3DLSTM(Approach):
         x = keras.layers.Dense(14)(x)
         x = keras.layers.Softmax()(x)
 
-        self._model = keras.Model(_input, x, name="C3D_LSTM")
+        self._model = keras.Model(
+            _input,
+            x,
+            name=self.__class__.__name__,
+        )

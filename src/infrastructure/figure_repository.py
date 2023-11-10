@@ -4,7 +4,7 @@ from configs import settings
 
 class FigureRespository:
     @classmethod
-    def save(self, file_name: str) -> None:  # , figure: Figure
+    def save(self, file_name: str) -> None:
         plt.savefig(
             fname=f"{settings.IMAGES_PATH}/{file_name}.png",
             dpi=60,
