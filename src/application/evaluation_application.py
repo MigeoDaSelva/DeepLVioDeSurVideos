@@ -83,10 +83,13 @@ class EvaluationApplication:
         return graphical_result
 
     def build_roc_curve(self) -> WidgetsController:
-        return WidgetsController
+        GraphicalResultsBuilder.build_roc_curve(self.approach)
+        file_name = f"{self.approach.model.name}-roc-curve-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
+        FigureRespository.save(file_name=file_name)
+        graphical_result = GraphicalResult(FigureRespository.load(file_name=file_name))
+        graphical_result.build()
+        graphical_result.show()
+        return graphical_result
 
-    def calculate_auc(self) -> WidgetsController:
-        result = ClassificationMetricsCalculator.calculate_AUC()
-        result_controller = ResultController(result)
-        result_controller.build()
-        result_controller.show()
+    def calculate_auc(self) -> float:
+        return ClassificationMetricsCalculator.calculate_AUC(self.approach)

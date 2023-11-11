@@ -41,5 +41,5 @@ class ClassificationMetricsCalculator:
         return {"precision": precision, "recall": recall, "f1_score": f1_score}
 
     @classmethod
-    def calculate_AUC(self) -> float:
-        return None
+    def calculate_AUC(self, approach: Approach) -> float:
+        return roc_auc_score(approach.actual, approach.predicted)

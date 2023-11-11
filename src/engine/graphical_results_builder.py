@@ -1,5 +1,5 @@
 from src.domain.approach.abstract_approach import Approach
-from matplotlib.figure import Figure
+from sklearn.metrics import RocCurveDisplay
 import matplotlib.pyplot as plt
 from typing import List
 import tensorflow as tf
@@ -20,3 +20,8 @@ class GraphicalResultsBuilder:
         plt.subplots_adjust(bottom=0.2, top=0.95, left=0.2, right=1)
         ax.xaxis.set_ticklabels(labels)
         ax.yaxis.set_ticklabels(labels)
+
+    @classmethod
+    def build_roc_curve(self, approach: Approach) -> None:
+        display = RocCurveDisplay.from_predictions(approach.actual, approach.predicted)
+        display.figure_.set_size_inches(10, 10)
