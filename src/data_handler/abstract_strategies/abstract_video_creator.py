@@ -2,7 +2,7 @@ from src.data_handler.abstract_strategies.abstract_class_names_finder import (
     ClassNamesFinder,
 )
 from src.data_handler.strategies.class_names_finder import UniqueClassNamesFinder
-from numpy import ndarray, array, fliplr, flipud, rot90, append
+from numpy import ndarray, array, fliplr, flipud, append
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from src.domain.video import Video
@@ -59,7 +59,7 @@ class VideoCreator(ABC):
         return start, stop, step
 
     def _completes_length(self, frames: ndarray) -> ndarray:
-        augmentation_approaches = [fliplr, flipud, rot90]
+        augmentation_approaches = [fliplr, flipud]
         initial_length = len(frames)
 
         while len(frames) < self.required_length:

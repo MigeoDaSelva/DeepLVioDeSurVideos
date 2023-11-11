@@ -1,5 +1,5 @@
 from src.data_handler.abstract_strategies.abstract_data_augmenter import DataAugmenter
-from numpy import ndarray, fliplr, flipud, empty
+from numpy import ndarray, fliplr, flipud, empty, rot90, append
 from dataclasses import dataclass, field
 from src.domain.video import Video
 from random import randint
