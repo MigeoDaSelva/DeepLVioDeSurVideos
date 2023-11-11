@@ -1,3 +1,7 @@
+from src.data_handler.strategies.video_creator import (
+    DecordVideoCreator,
+    OpenCVVideoCreator,
+)
 from src.data_handler.strategies.data_normalizer import (
     DataNormalizerComposite,
     ResizeWithPadding,
@@ -5,7 +9,6 @@ from src.data_handler.strategies.data_normalizer import (
 from src.data_handler.strategies.class_names_finder import UniqueClassNamesFinder
 from src.data_handler.strategies.file_path_finder import FilePathFinderByLoad
 from src.data_handler.strategies.id_generator import SequentialIDGenerator
-from src.data_handler.strategies.video_creator import DecordVideoCreator
 from src.data_handler.data_generator import DataGenerator
 from src.controller.data_settings import DataSettings
 from pathlib import Path

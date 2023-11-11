@@ -2,10 +2,11 @@ from src.data_handler.abstract_strategies.abstract_class_names_finder import (
     ClassNamesFinder,
 )
 from src.data_handler.strategies.class_names_finder import UniqueClassNamesFinder
+from numpy import ndarray, array, fliplr, flipud, rot90, append
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from src.domain.video import Video
-from numpy import ndarray
+from random import randint
 from pathlib import Path
 from typing import Union
 
@@ -17,7 +18,7 @@ class VideoCreator(ABC):
     """
 
     video_path: Path = field(init=False)
-    required_length: Union[None, int] = field(default=None)
+    required_length: int = field(default=0)
     class_name_finder: ClassNamesFinder = field(default=UniqueClassNamesFinder())
 
     def creates(self, video_path: Path) -> Video:
@@ -47,7 +48,26 @@ class VideoCreator(ABC):
 
     def calculates_range_values(self) -> tuple:
         total_length = self.gets_total_length()
-        step = int(total_length / self.required_length)
-        stop = step * self.required_length
-        start = 0 if stop <= total_length else step
+        if total_length > self.required_length:
+            step = int(total_length / self.required_length)
+            stop = step * self.required_length
+            start = 0 if stop <= total_length else step
+        else:
+            step = 1
+            stop = total_length
+            start = 0
         return start, stop, step
+
+    def _completes_length(self, frames: ndarray) -> ndarray:
+        augmentation_approaches = [fliplr, flipud, rot90]
+        initial_length = len(frames)
+
+        while len(frames) < self.required_length:
+            frame_index = randint(0, len(frames) - 1)
+            approach_index = randint(0, len(augmentation_approaches) - 1)
+
+            approach = augmentation_approaches[approach_index]
+            frame = frames[frame_index]
+
+            frames = append(frames, array([approach(frame)]), axis=0)
+        return frames
