@@ -38,8 +38,7 @@ class Movinet(PreTrainedApproach):
     def build_only_base(self) -> None:
         backbone = movinet.Movinet(model_id=settings.MOVINET_VERSION.split("_")[1])
 
-        if not self.unfreezing:
-            backbone.trainable = False
+        backbone.trainable = self.unfreezing
 
         self._model = movinet_model.MovinetClassifier(
             backbone=backbone,
