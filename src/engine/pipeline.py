@@ -11,6 +11,7 @@ class Pipeline:
     train_dataset: DataGenerator
     validation_dataset: DataGenerator
     dataset_factory: DatasetFactory
+    build_model: bool = field(default=True)
 
     _train_ds: tf.data.Dataset = field(init=False)
     _validation_ds: tf.data.Dataset = field(init=False)
@@ -24,6 +25,7 @@ class Pipeline:
         )
 
     def run(self) -> None:
-        self.approach.build()
+        if self.build_model:
+            self.approach.build()
         self.approach.compile()
         self.approach.fit(train_ds=self._train_ds, validation_ds=self._validation_ds)

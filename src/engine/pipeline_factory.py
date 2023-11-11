@@ -1,4 +1,5 @@
 from src.data_handler.data_generator_factory import DataGeneratorFactory
+from src.infrastructure.approach_repository import ApproachRepository
 from src.controller.approach_settings import ApproachSettings
 from src.data_handler.dataset_factory import DatasetFactory
 from src.engine.approach_factory import ApproachFactory
@@ -33,11 +34,21 @@ class PipelineFactory:
         approach = ApproachFactory.creates(
             data_settings=data_settings, approach_settings=approach_settings
         )
+
+        if approach_settings.load_latest_model:
+            approach.unfreezing = approach_settings.unfreezing
+            approach.build_only_base()
+            approach = ApproachRepository.loads_latest_model_checkpoint(
+                approach=approach, approach_settings=approach_settings
+            )
+
         dataset_factory = DatasetFactory(
             batch_size=data_settings.batch_size,
             output_shape=(None, None, None, data_settings.n_channels),
         )
+
         return Pipeline(
+            build_model=not approach_settings.load_latest_model,
             approach=approach,
             train_dataset=train_generator,
             validation_dataset=validation_generator,

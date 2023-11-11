@@ -1,9 +1,8 @@
 from src.infrastructure.attributes_repository import AttributesRepository
 from src.controller.approach_settings import ApproachSettings
+from src.domain.approach.abstract_approach import Approach
 from dataclasses import dataclass, field
-from tensorflow.keras import Model
 from configs import settings
-from tensorflow import keras
 import json
 
 
@@ -26,9 +25,10 @@ class ApproachRepository(AttributesRepository):
     def update_saved__attributes(self) -> None:
         pass
 
+    @classmethod
     def loads_latest_model_checkpoint(
-        self, approach_settings: ApproachSettings
-    ) -> Model:
+        self, approach: Approach, approach_settings: ApproachSettings
+    ) -> Approach:
         existing_models = list(
             filter(
                 lambda path: path.match(f"*{approach_settings.approach.__name__}*"),
@@ -37,5 +37,6 @@ class ApproachRepository(AttributesRepository):
         )
         existing_models.sort()
         existing_models.reverse()
-        latest_model = existing_models[0]
-        return keras.saving.load_model(latest_model)
+        latest_model_path = existing_models[0]
+        approach.model.load_weights(latest_model_path)
+        return approach

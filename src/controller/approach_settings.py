@@ -32,9 +32,18 @@ import tensorflow as tf
 
 @dataclass
 class ApproachSettings(SettingController):
-    fine_tuning_checkbox: Checkbox = field(
+    load_model_container: VBox = field(
         init=False,
     )
+
+    load_latest_model_checkbox: Checkbox = field(
+        init=False,
+    )
+
+    unfreezing_checkbox: Checkbox = field(
+        init=False,
+    )
+
     approach_dropdown: Dropdown = field(
         init=False,
     )
@@ -73,8 +82,12 @@ class ApproachSettings(SettingController):
     )
 
     @property
-    def fine_tuning(self) -> bool:
-        return self.fine_tuning_checkbox.value
+    def load_latest_model(self) -> bool:
+        return self.load_latest_model_checkbox.value
+
+    @property
+    def unfreezing(self) -> bool:
+        return self.unfreezing_checkbox.value
 
     @property
     def approach(self) -> Approach:
@@ -167,7 +180,7 @@ class ApproachSettings(SettingController):
 
     def show(self) -> None:
         display(
-            self.fine_tuning_checkbox,
+            self.load_model_container,
             self.approach_dropdown,
             self.optimizer_dropdown,
             self.activation_dropdown,
@@ -181,12 +194,30 @@ class ApproachSettings(SettingController):
             self.callbacks_accordion,
         )
 
+    def _on_value_change(self, change: dict) -> None:
+        self.unfreezing_checkbox.disabled = not change["new"]
+
     def build(self) -> None:
-        self.fine_tuning_checkbox = Checkbox(
+        self.load_latest_model_checkbox = Checkbox(
             value=False,
-            description="Model fine-tuning",
+            description="Load last model checkpoint",
             disabled=False,
             indent=False,
+        )
+        self.unfreezing_checkbox = Checkbox(
+            value=False,
+            description="Unfreezing",
+            disabled=True,
+        )
+
+        self.load_latest_model_checkbox.observe(self._on_value_change, names="value")
+
+        self.load_model_container = VBox(
+            children=[
+                self.load_latest_model_checkbox,
+                self.unfreezing_checkbox,
+            ],
+            disabled=False,
         )
 
         self.approach_dropdown = Dropdown(

@@ -25,8 +25,8 @@ class ApproachFactory:
             kernel_size=approach_settings.kernel_size,
             conv_activation=approach_settings.activation,
             pooling_strides=approach_settings.pooling_strides,
-            loss=SparseCategoricalCrossentropy(
-                from_logits=True
+            loss=BinaryCrossentropy(
+                # from_logits=True
             ),  # when don't use softmax from_logits=True
             optimizer=approach_settings.optimizer,
         )
