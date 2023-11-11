@@ -31,7 +31,9 @@ SUPPORTED_VIDEO_EXTENSIONS: list = (
 )
 DATASET_NAME: str = str(os.environ.get("DATASET_NAME"))
 MOVINET_VERSION: str = str(os.environ.get("MOVINET_VERSION"))
-MOVINET_URL: str = str(os.environ.get("MOVINET_URL"))
+MOVINET_URL: str = str(os.environ.get("MOVINET_URL")).replace(
+    "<VERSION>", MOVINET_VERSION
+)
 
 # Path definitions
 CLASSIFICATION_METRICS: Path = _decides_source("CLASSIFICATION_METRICS")
