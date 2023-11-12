@@ -5,12 +5,16 @@ from src.infrastructure.pre_trained_models_downloader import (
 from official.projects.movinet.modeling import movinet_model
 from official.projects.movinet.modeling import movinet
 from configs import settings
+from pathlib import Path
 import tensorflow as tf
 
 
 class Movinet(PreTrainedApproach):
     def build(self) -> None:
-        Downloader.download_movinet()
+        if not Path(
+            f"{settings.PRE_TRAINED_MODELS_PATH}/{settings.MOVINET_VERSION}"
+        ).exists():
+            Downloader.download_movinet()
         backbone = movinet.Movinet(model_id=settings.MOVINET_VERSION.split("_")[1])
 
         backbone.trainable = self.unfreezing

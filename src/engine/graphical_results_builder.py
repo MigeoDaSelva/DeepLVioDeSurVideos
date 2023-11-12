@@ -25,3 +25,4 @@ class GraphicalResultsBuilder:
     def build_roc_curve(self, approach: Approach) -> None:
         display = RocCurveDisplay.from_predictions(approach.actual, approach.predicted)
         display.figure_.set_size_inches(10, 10)
+        plt.rcParams.update({"font.size": 20})

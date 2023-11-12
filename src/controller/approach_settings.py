@@ -199,13 +199,13 @@ class ApproachSettings(SettingController):
 
     def build(self) -> None:
         self.load_latest_model_checkbox = Checkbox(
-            value=False,
+            value=self.default_values.get("load_latest_model"),
             description="Load last model checkpoint",
             disabled=False,
             indent=False,
         )
         self.unfreezing_checkbox = Checkbox(
-            value=False,
+            value=self.default_values.get("unfreezing"),
             description="Unfreezing",
             disabled=True,
         )
@@ -227,7 +227,7 @@ class ApproachSettings(SettingController):
                 ("C3D+LSTM", C3DLSTM),
                 ("Movinet", Movinet),
             ],
-            value=Conv2Plus1D,
+            value=eval(f"{self.default_values.get('approach')}"),
             description="Approach options: ",
             disabled=False,
             layout=self.layout,
@@ -406,32 +406,81 @@ class ApproachSettings(SettingController):
         model_checkpoint = VBox(
             children=[
                 Checkbox(
-                    value=False, description="Disabled", disabled=False, indent=False
+                    value=self.default_values.get(
+                        "callbacks",
+                    )
+                    .get(
+                        "model_checkpoint",
+                    )
+                    .get("disabled"),
+                    description="Disabled",
+                    disabled=False,
+                    indent=False,
                 )
             ]
         )
 
         csv_logger_checkbox = Checkbox(
-            value=True, description="Disabled", disabled=False, indent=False
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "csv_logger",
+            )
+            .get("disabled"),
+            description="Disabled",
+            disabled=False,
+            indent=False,
         )
         csv_logger_append = Checkbox(
-            value=True, description="Append", disabled=False, indent=False
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "csv_logger",
+            )
+            .get("append"),
+            description="Append",
+            disabled=False,
+            indent=False,
         )
         jslink((csv_logger_checkbox, "value"), (csv_logger_append, "disabled"))
         csv_logger = VBox(children=[csv_logger_checkbox, csv_logger_append])
 
         early_stopping_checkbox = Checkbox(
-            value=False, description="Disabled", disabled=False, indent=False
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "early_stopping",
+            )
+            .get("disabled"),
+            description="Disabled",
+            disabled=False,
+            indent=False,
         )
         early_stopping_monitor = Dropdown(
             options=["val_loss", "loss"],
-            value="loss",
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "early_stopping",
+            )
+            .get("monitor"),
             description="Monitor: ",
             disabled=False,
             layout=self.layout,
             style=self.style,
         )
         early_stopping_patience = IntSlider(
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "early_stopping",
+            )
+            .get("patience"),
             min=0,
             max=100,
             step=1,
@@ -452,10 +501,25 @@ class ApproachSettings(SettingController):
         )
 
         lr_scheduler_checkbox = Checkbox(
-            value=True, description="Disabled", disabled=False, indent=False
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "learning_rate_scheduler",
+            )
+            .get("disabled"),
+            description="Disabled",
+            disabled=False,
+            indent=False,
         )
         lr_scheduler_start = IntSlider(
-            value=4,
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "learning_rate_scheduler",
+            )
+            .get("starts_at"),
             min=0,
             max=100,
             step=1,
@@ -464,7 +528,13 @@ class ApproachSettings(SettingController):
             style=self.style,
         )
         lr_scheduler_every = IntSlider(
-            value=5,
+            value=self.default_values.get(
+                "callbacks",
+            )
+            .get(
+                "learning_rate_scheduler",
+            )
+            .get("every"),
             min=0,
             max=50,
             step=1,
@@ -481,7 +551,16 @@ class ApproachSettings(SettingController):
         plot_losses_keras = VBox(
             children=[
                 Checkbox(
-                    value=True, description="Disabled", disabled=False, indent=False
+                    value=self.default_values.get(
+                        "callbacks",
+                    )
+                    .get(
+                        "plot_losses_keras",
+                    )
+                    .get("disabled"),
+                    description="Disabled",
+                    disabled=False,
+                    indent=False,
                 )
             ]
         )

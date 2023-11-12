@@ -54,6 +54,7 @@ class ScopeSettings(SettingController):
     def build(self) -> None:
         itens = [
             Dropdown(
+                value=self.default_values.get("iterations").get("literally"),
                 options=list(
                     range(
                         self.default_values.get("existing_cross_validation").get(
@@ -66,6 +67,7 @@ class ScopeSettings(SettingController):
                 disabled=False,
             ),
             IntSlider(
+                value=self.default_values.get("iterations").get("sequential"),
                 min=0,
                 max=self.default_values.get("existing_cross_validation").get(
                     "iterations"
@@ -75,6 +77,7 @@ class ScopeSettings(SettingController):
                 disabled=False,
             ),
             IntRangeSlider(
+                value=self.default_values.get("iterations").get("range"),
                 min=0,
                 max=self.default_values.get("existing_cross_validation").get(
                     "iterations"
@@ -89,19 +92,21 @@ class ScopeSettings(SettingController):
         ]
 
         stack = Stack(itens, selected_index=0)
-        dropdown = Dropdown(
+        procedure = Dropdown(
+            value=self.default_values.get("iterations").get("procedure"),
             options=["Literally", "Sequential", "Range"],
         )
         description = Label(value="Select iteration(s):")
-        jslink((dropdown, "index"), (stack, "selected_index"))
+        jslink((procedure, "index"), (stack, "selected_index"))
         self.iterations_v_box = VBox(
-            [description, dropdown, stack],
+            [description, procedure, stack],
             style=self.style,
             indent=False,
         )
 
         itens = [
             Dropdown(
+                value=self.default_values.get("folds").get("literally"),
                 options=list(
                     range(
                         self.default_values.get("existing_cross_validation").get(
@@ -114,6 +119,7 @@ class ScopeSettings(SettingController):
                 disabled=False,
             ),
             IntSlider(
+                value=self.default_values.get("folds").get("sequential"),
                 min=0,
                 max=self.default_values.get("existing_cross_validation").get("folds"),
                 step=1,
@@ -121,6 +127,7 @@ class ScopeSettings(SettingController):
                 disabled=False,
             ),
             IntRangeSlider(
+                value=self.default_values.get("folds").get("range"),
                 min=0,
                 max=self.default_values.get("existing_cross_validation").get("folds"),
                 step=1,
@@ -133,13 +140,14 @@ class ScopeSettings(SettingController):
         ]
 
         stack = Stack(itens, selected_index=0)
-        dropdown = Dropdown(
+        procedure = Dropdown(
+            value=self.default_values.get("folds").get("procedure"),
             options=["Literally", "Sequential", "Range"],
         )
         description = Label(value="Select fold(s):")
-        jslink((dropdown, "index"), (stack, "selected_index"))
+        jslink((procedure, "index"), (stack, "selected_index"))
         self.folds_v_box = VBox(
-            [description, dropdown, stack],
+            [description, procedure, stack],
             style=self.style,
         )
 

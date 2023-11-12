@@ -7,5 +7,17 @@
     "cross_validation": {
         "n_iterations": 30,
         "k_folds": 10
+    },
+    "iterations": {
+        "procedure": "Literally", 
+        "literally": 0,
+        "sequential": 0,
+        "range": [0, 0]
+    },
+    "folds": {
+        "procedure": "Literally", 
+        "literally": 0,
+        "sequential": 0,
+        "range": [0, 0]
     }
 }

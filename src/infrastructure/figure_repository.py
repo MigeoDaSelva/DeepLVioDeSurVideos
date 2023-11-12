@@ -10,9 +10,9 @@ class FigureRespository:
             dpi=60,
             format="png",
         )
-        plt.close()
         plt.cla()
         plt.clf()
+        plt.close()
 
     @classmethod
     def load(
