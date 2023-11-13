@@ -1,5 +1,5 @@
 {
-    "batch_size": 64,
+    "batch_size": 16,
     "n_frames": 50,
     "height": 172,
     "width": 172,

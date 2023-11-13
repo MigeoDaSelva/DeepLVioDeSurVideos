@@ -1,4 +1,8 @@
-from tensorflow.keras.losses import SparseCategoricalCrossentropy, BinaryCrossentropy
+from tensorflow.keras.losses import (
+    SparseCategoricalCrossentropy,
+    BinaryCrossentropy,
+    CategoricalCrossentropy,
+)
 from src.controller.approach_settings import ApproachSettings
 from src.domain.approach.abstract_approach import Approach
 from src.controller.data_settings import DataSettings
@@ -26,7 +30,7 @@ class ApproachFactory:
             conv_activation=approach_settings.activation,
             pooling_strides=approach_settings.pooling_strides,
             loss=BinaryCrossentropy(
-                # from_logits=True
+                # from_logits=True,
             ),  # when don't use softmax from_logits=True
             optimizer=approach_settings.optimizer,
         )

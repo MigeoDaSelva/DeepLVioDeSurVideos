@@ -27,7 +27,15 @@ class Approach(ABC):
     _predicted: Tensor = field(init=False)
 
     def __post_init__(self) -> None:
-        self.metrics = ["accuracy"]
+        self.metrics = [
+            tf.keras.metrics.TopKCategoricalAccuracy(
+                k=1, name="top_1", dtype=tf.float32
+            ),
+            tf.keras.metrics.TopKCategoricalAccuracy(
+                k=5, name="top_5", dtype=tf.float32
+            ),
+            "accuracy",
+        ]
 
     @abstractmethod
     def build(self) -> None:
