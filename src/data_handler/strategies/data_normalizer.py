@@ -1,7 +1,7 @@
 from src.data_handler.abstract_strategies.abstract_data_normalizer import DataNormalizer
 from dataclasses import dataclass, field
 from src.domain.video import Video
-from numpy import empty, float16
+from numpy import empty, float32
 from typing import List
 import tensorflow as tf
 
@@ -26,9 +26,9 @@ class DataNormalizerComposite(DataNormalizer):
 
 class ChangeImageType(DataNormalizer):
     def normalizes(self, video: Video) -> None:
-        new_video_frames = empty(shape=video.frames.shape, dtype=float16)
+        new_video_frames = empty(shape=video.frames.shape, dtype=float32)
         for i, frame in enumerate(video.frames):
-            new_video_frames[i] = frame.astype(float16)
+            new_video_frames[i] = frame.astype(float32)
         video.frames = new_video_frames
 
 
@@ -44,10 +44,10 @@ class ResizeWithPadding(DataNormalizer):
                 self.output_size[1],
                 video.frames.shape[3],
             ),
-            dtype=float16,
+            dtype=float32,
         )
         for i, frame in enumerate(video.frames):
             new_video_frames[i] = tf.image.resize_with_pad(
-                frame.astype(float16), *self.output_size
+                frame.astype(float32), *self.output_size
             )
         video.frames = new_video_frames

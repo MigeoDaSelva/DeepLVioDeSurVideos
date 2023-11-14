@@ -1,4 +1,6 @@
+from src.infrastructure.approach_repository import ApproachRepository
 from src.controller.approach_settings import ApproachSettings
+from src.domain.approach.abstract_approach import Approach
 from src.engine.pipeline_factory import PipelineFactory
 from src.controller.scope_settings import ScopeSettings
 from src.controller.data_settings import DataSettings
@@ -18,3 +20,7 @@ class ExecutionApplication:
             data_settings,
             approach_settings,
         )
+
+    @classmethod
+    def load_latest_model(self, approach: Approach) -> Approach:
+        return ApproachRepository.loads_latest_model_checkpoint(approach)

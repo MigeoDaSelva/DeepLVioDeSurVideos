@@ -26,12 +26,10 @@ class ApproachRepository(AttributesRepository):
         pass
 
     @classmethod
-    def loads_latest_model_checkpoint(
-        self, approach: Approach, approach_settings: ApproachSettings
-    ) -> Approach:
+    def loads_latest_model_checkpoint(self, approach: Approach) -> Approach:
         existing_models = list(
             filter(
-                lambda path: path.match(f"*{approach_settings.approach.__name__}*"),
+                lambda path: path.match(f"*{approach.model.name}*"),
                 settings.EXISTING_MODEL_CHECKPOINT_FILES,
             )
         )

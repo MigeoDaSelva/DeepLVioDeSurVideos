@@ -144,7 +144,9 @@ class ApproachSettings(SettingController):
             callbacks.append(
                 ModelCheckpoint(
                     filepath=f"{settings.MODEL_CHECKPOINT_PATH}/({date.today()})-{self.approach_dropdown.value.__name__}-model-"
-                    + "{epoch:003d}-{val_loss:.5f}.keras"
+                    + "{epoch:003d}-{val_loss:.5f}",
+                    save_best_only=True,
+                    verbose=0,
                 )
             )
 
@@ -583,7 +585,12 @@ class ApproachSettings(SettingController):
         )
 
     def _scheduler(self, epoch, lr):
-        if epoch > 4 and epoch % 5 == 0:
-            return lr * tf.math.exp(-0.1)
+        if (
+            epoch > self.callbacks_accordion.children[0].children[3].children[1].value
+            and epoch
+            % self.callbacks_accordion.children[0].children[3].children[2].value
+            == 0
+        ):
+            return lr * tf.math.exp(-1.0)
         else:
             return lr

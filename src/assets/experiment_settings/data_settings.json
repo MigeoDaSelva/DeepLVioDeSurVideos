@@ -1,7 +1,7 @@
 {
-    "batch_size": 16,
-    "n_frames": 50,
-    "height": 172,
-    "width": 172,
+    "batch_size": 4,
+    "n_frames": 10,
+    "height": 224,
+    "width": 224,
     "n_channels": 3
 }

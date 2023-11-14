@@ -56,40 +56,44 @@ class EvaluationApplication:
     def calculate_classification_metrics(
         self,
     ) -> WidgetsController:
+        file_name = f"{self.approach.model.name}-classification-metrics-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
         classification_metrics = (
             ClassificationMetricsCalculator.calculate_classification_metrics(
                 self.approach,
                 self.labels,
             )
         )
-        file_name = f"{self.approach.model.name}-classification-metrics-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
         MetricsRepository.write(file_name=file_name, metrics=classification_metrics)
         result = MetricsResult(MetricsRepository.read(file_name=file_name))
         result.build()
         result.show()
         return result
 
+    def build_learning_curves(self) -> WidgetsController:
+        file_name = f"{self.approach.model.name}-learning-curves-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
+        GraphicalResultsBuilder.build_learning_curves(approach=self.approach)
+        return self._save_and_show_figure(file_name=file_name)
+
     def build_confusion_matrix(
         self,
     ) -> WidgetsController:
+        file_name = f"{self.approach.model.name}-test-confusion-matrix-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
         GraphicalResultsBuilder.build_confusion_matrix(
             approach=self.approach, labels=self.labels
         )
-        file_name = f"{self.approach.model.name}-test-confusion-matrix-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
-        FigureRespository.save(file_name=file_name)
-        graphical_result = GraphicalResult(FigureRespository.load(file_name=file_name))
-        graphical_result.build()
-        graphical_result.show()
-        return graphical_result
+        return self._save_and_show_figure(file_name=file_name)
 
     def build_roc_curve(self) -> WidgetsController:
-        GraphicalResultsBuilder.build_roc_curve(self.approach)
         file_name = f"{self.approach.model.name}-roc-curve-({datetime.now().strftime('%d-%m-%Y-%H-%M')})"
-        FigureRespository.save(file_name=file_name)
-        graphical_result = GraphicalResult(FigureRespository.load(file_name=file_name))
-        graphical_result.build()
-        graphical_result.show()
-        return graphical_result
+        GraphicalResultsBuilder.build_roc_curve(self.approach)
+        return self._save_and_show_figure(file_name=file_name)
 
     def calculate_auc(self) -> float:
         return ClassificationMetricsCalculator.calculate_AUC(self.approach)
+
+    def _save_and_show_figure(self, file_name: str) -> WidgetsController:
+        FigureRespository.save(file_name=file_name)
+        graphical_result = GraphicalResult(FigureRespository.load(file_name=file_name))
+        graphical_result.build()
+        graphical_result.show()
+        return graphical_result

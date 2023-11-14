@@ -14,7 +14,7 @@ class DatasetFactory:
         self._output_signature = (
             tf.TensorSpec(
                 shape=self.output_shape,
-                dtype=tf.float16,
+                dtype=tf.float32,
             ),
             tf.TensorSpec(shape=(), dtype=tf.int8),
         )

@@ -1,13 +1,13 @@
 {   "load_latest_model": false,
-    "unfreezing": true,
-    "approach": "Movinet",
+    "unfreezing": false,
+    "approach": "C3D",
     "optimizer": "Adam",
     "activation": "relu",
     "padding": "same",
     "epochs": 100,
     "filters": 32,
-    "dropout": 0.1,
-    "learning_rate": 0.00001,
+    "dropout": 0.5,
+    "learning_rate": 0.001,
     "kernel_size": [3, 3, 3],
     "pooling_strides": [2, 2, 2],
     "callbacks": {
@@ -26,7 +26,7 @@
         "learning_rate_scheduler": {
             "disabled": false,
             "starts_at": 9,
-            "every": 10
+            "every": 5
         },
         "plot_losses_keras": {
             "disabled": true

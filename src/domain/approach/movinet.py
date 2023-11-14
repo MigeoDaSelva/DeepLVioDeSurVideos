@@ -33,7 +33,7 @@ class Movinet(PreTrainedApproach):
         status.assert_existing_objects_matched()
         self._model = movinet_model.MovinetClassifier(
             backbone=backbone,
-            num_classes=2,
+            num_classes=10,
             name=self.__class__.__name__,
         )
         self.model.build(self.input_shape)
@@ -50,6 +50,6 @@ class Movinet(PreTrainedApproach):
 
         self._model = movinet_model.MovinetClassifier(
             backbone=backbone,
-            num_classes=2,
+            num_classes=10,
             name=self.__class__.__name__,
         )
