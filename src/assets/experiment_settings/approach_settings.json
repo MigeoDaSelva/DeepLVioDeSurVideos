@@ -1,7 +1,7 @@
 {   "load_latest_model": false,
     "unfreezing": false,
     "approach": "C3D",
-    "optimizer": "Adam",
+    "optimizer": "Adagrad",
     "activation": "relu",
     "padding": "same",
     "epochs": 100,
