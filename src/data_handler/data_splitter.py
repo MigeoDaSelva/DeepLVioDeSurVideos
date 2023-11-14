@@ -28,7 +28,7 @@ class DataSplitter:
         self._calculates_splits_size(self.train_size)
 
     def splits(self) -> None:
-        shuffle(self.dataset)
+        # shuffle(self.dataset)
         class_names = ClassNamesSequentialFinder().finds(file_paths=self.dataset)
         train_test_cross_validator = StratifiedShuffleSplit(
             n_splits=self.k_folds, train_size=self.train_size, test_size=self.test_size

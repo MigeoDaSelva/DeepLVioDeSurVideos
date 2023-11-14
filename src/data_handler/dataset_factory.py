@@ -25,7 +25,8 @@ class DatasetFactory:
         )
         if self.keep_cached:
             dataset = dataset.cache()
-        dataset = dataset.shuffle(buffer_size=dataset.cardinality())
+        if data_generator.shuffle:
+            dataset = dataset.shuffle(buffer_size=dataset.cardinality())
         dataset = dataset.batch(self.batch_size)
         dataset = dataset.prefetch(buffer_size=tf.data.AUTOTUNE)
         return dataset

@@ -46,6 +46,7 @@ class EvaluationApplication:
             ),
             data_settings=self.data_settings,
         )
+        test_generator.shuffle = False
         dataset_factory = DatasetFactory(
             batch_size=self.data_settings.batch_size,
             output_shape=(None, None, None, self.data_settings.n_channels),
