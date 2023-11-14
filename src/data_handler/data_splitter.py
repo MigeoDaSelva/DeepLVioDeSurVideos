@@ -33,12 +33,12 @@ class DataSplitter:
         train_test_cross_validator = StratifiedShuffleSplit(
             n_splits=self.k_folds, train_size=self.train_size, test_size=self.test_size
         )
-  
-        train_validation_cross_validator = StratifiedShuffleSplit(
-            n_splits=1,
-            train_size=1-self.validation_size,
-            test_size=self.validation_size,
-        )
+        if self.validation_size:
+            train_validation_cross_validator = StratifiedShuffleSplit(
+                n_splits=1,
+                train_size=1-self.validation_size,
+                test_size=self.validation_size,
+            )
         for i in range(self.n_iterations):
             train_test_indexes = train_test_cross_validator.split(
                 X=self.dataset, y=class_names
