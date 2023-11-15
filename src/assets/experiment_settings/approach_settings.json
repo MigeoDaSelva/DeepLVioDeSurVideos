@@ -21,12 +21,12 @@
         "early_stopping": {
             "disabled": false,
             "monitor": "val_loss",
-            "patience": 10
+            "patience": 15
         },
         "learning_rate_scheduler": {
             "disabled": false,
-            "starts_at": 9,
-            "every": 5
+            "starts_at": 14,
+            "every": 10
         },
         "plot_losses_keras": {
             "disabled": true
