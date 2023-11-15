@@ -32,5 +32,7 @@ class ApproachFactory:
             loss=BinaryCrossentropy(
                 # from_logits=True,
             ),  # when don't use softmax from_logits=True
-            optimizer=approach_settings.optimizer,
+            optimizer=approach_settings.optimizer(
+                learning_rate=approach_settings.learning_rate,
+            ),
         )

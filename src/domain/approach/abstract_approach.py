@@ -28,13 +28,8 @@ class Approach(ABC):
 
     def __post_init__(self) -> None:
         self.metrics = [
-            tf.keras.metrics.TopKCategoricalAccuracy(
-                k=1, name="top_1", dtype=tf.float32
-            ),
-            tf.keras.metrics.TopKCategoricalAccuracy(
-                k=5, name="top_5", dtype=tf.float32
-            ),
-            "accuracy",
+            tf.keras.metrics.BinaryAccuracy(),
+            # "accuracy",
         ]
 
     @abstractmethod

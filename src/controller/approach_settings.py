@@ -10,6 +10,18 @@ from ipywidgets import (
     Checkbox,
     jslink,
 )
+from tensorflow.keras.optimizers import (
+    SGD,
+    RMSprop,
+    Adam,
+    AdamW,
+    Adadelta,
+    Adagrad,
+    Adamax,
+    Adafactor,
+    Nadam,
+    Ftrl,
+)
 from tensorflow.keras.callbacks import (
     ModelCheckpoint,
     CSVLogger,
@@ -238,18 +250,18 @@ class ApproachSettings(SettingController):
 
         self.optimizer_dropdown = Dropdown(
             options=[
-                "SGD",
-                "RMSprop",
-                "Adam",
-                "AdamW",
-                "Adadelta",
-                "Adagrad",
-                "Adamax",
-                "Adafactor",
-                "Nadam",
-                "Ftrl",
+                ("SGD", SGD),
+                ("RMSprop", RMSprop),
+                ("Adam", Adam),
+                ("AdamW", AdamW),
+                ("Adadelta", Adadelta),
+                ("Adagrad", Adagrad),
+                ("Adamax", Adamax),
+                ("Adafactor", Adafactor),
+                ("Nadam", Nadam),
+                ("Ftrl", Ftrl),
             ],
-            value=self.default_values.get("optimizer"),
+            value=eval(self.default_values.get("optimizer")),
             description="Optimizer options: ",
             disabled=False,
             layout=self.layout,
