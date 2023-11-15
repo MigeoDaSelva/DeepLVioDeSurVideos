@@ -36,8 +36,7 @@ class PipelineFactory:
         )
 
         if approach_settings.load_latest_model:
-            approach.unfreezing = approach_settings.unfreezing
-            approach.build_only_base()
+            approach.build()
             approach = ApproachRepository.loads_latest_model_checkpoint(
                 approach=approach
             )
