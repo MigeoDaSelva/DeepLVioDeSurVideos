@@ -4,7 +4,7 @@
     "optimizer": "Adagrad",
     "activation": "relu",
     "padding": "same",
-    "epochs": 100,
+    "epochs": 200,
     "filters": 32,
     "dropout": 0.5,
     "learning_rate": 0.001,

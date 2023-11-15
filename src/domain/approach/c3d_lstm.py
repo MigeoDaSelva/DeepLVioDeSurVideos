@@ -133,9 +133,9 @@ class C3DLSTM(Approach):
         x = keras.layers.Dense(1024)(x)
         x = keras.layers.ReLU()(x)
         x = keras.layers.Dropout(self.dropout)(x)
-        x = keras.layers.Dense(1)(x)
-        x = keras.layers.Activation("sigmoid")(x)
-        # x = keras.layers.Softmax()(x)
+        x = keras.layers.Dense(14)(x)
+        # x = keras.layers.Activation("sigmoid")(x)
+        x = keras.layers.Softmax()(x)
 
         self._model = keras.Model(
             _input,

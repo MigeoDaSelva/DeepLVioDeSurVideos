@@ -28,8 +28,8 @@ class Approach(ABC):
 
     def __post_init__(self) -> None:
         self.metrics = [
-            tf.keras.metrics.BinaryAccuracy(),
-            # "accuracy",
+            # tf.keras.metrics.BinaryAccuracy(),
+            "accuracy",
         ]
 
     @abstractmethod
