@@ -64,7 +64,7 @@ class DataSettings(SettingController):
         self.n_frames_slider = IntSlider(
             value=self.default_values.get("n_frames"),
             min=1,
-            max=100,
+            max=150,
             step=1,
             description="Number of frames: ",
             layout=self.layout,
