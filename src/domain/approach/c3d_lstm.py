@@ -115,26 +115,16 @@ class C3DLSTM(Approach):
         shape = x.shape
         x = keras.layers.Reshape((shape[-1], shape[1] * shape[2] * shape[3]))(x)
 
-        x = keras.layers.LSTM(512)(x)
+        x = keras.layers.LSTM(128)(x)
 
         x = keras.layers.LayerNormalization()(x)
         x = keras.layers.GlobalAveragePooling3D()(x)
         x = keras.layers.Flatten()(x)
 
-        x = keras.layers.Dense(1024)(x)
+        x = keras.layers.Dense(4096)(x)
         x = keras.layers.ReLU()(x)
         x = keras.layers.Dropout(self.dropout)(x)
-        x = keras.layers.Dense(1024)(x)
-        x = keras.layers.ReLU()(x)
-        x = keras.layers.Dropout(self.dropout)(x)
-        x = keras.layers.Dense(1024)(x)
-        x = keras.layers.ReLU()(x)
-        x = keras.layers.Dropout(self.dropout)(x)
-        x = keras.layers.Dense(1024)(x)
-        x = keras.layers.ReLU()(x)
-        x = keras.layers.Dropout(self.dropout)(x)
-        x = keras.layers.Dense(14)(x)
-        # x = keras.layers.Activation("sigmoid")(x)
+        x = keras.layers.Dense(4096)(x)
         x = keras.layers.Softmax()(x)
 
         self._model = keras.Model(
