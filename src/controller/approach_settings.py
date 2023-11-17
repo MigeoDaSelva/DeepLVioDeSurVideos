@@ -603,6 +603,6 @@ class ApproachSettings(SettingController):
             % self.callbacks_accordion.children[0].children[3].children[2].value
             == 0
         ):
-            return lr * tf.math.exp(-0.1)
+            return lr * tf.math.exp(-0.01)
         else:
             return lr
