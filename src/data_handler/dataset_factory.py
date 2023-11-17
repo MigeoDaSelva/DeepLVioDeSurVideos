@@ -16,7 +16,7 @@ class DatasetFactory:
                 shape=self.output_shape,
                 dtype=tf.float32,
             ),
-            tf.TensorSpec(shape=(), dtype=tf.int8),
+            tf.TensorSpec(shape=(), dtype=tf.int16),
         )
 
     def creates(self, data_generator: DataGenerator) -> tf.data.Dataset:

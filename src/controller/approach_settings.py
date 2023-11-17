@@ -337,7 +337,7 @@ class ApproachSettings(SettingController):
             base=10,
             min=-7,
             max=-1,
-            step=1,
+            step=0.1,
             description="Learning rate: ",
             readout_format=".1g",
             layout=self.layout,

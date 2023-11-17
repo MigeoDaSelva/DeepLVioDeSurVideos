@@ -17,6 +17,8 @@ class Movinet(PreTrainedApproach):
             Downloader.download_movinet()
         backbone = movinet.Movinet(model_id=settings.MOVINET_VERSION.split("_")[1])
 
+        backbone.trainable = self.unfreezing
+
         model = movinet_model.MovinetClassifier(
             backbone=backbone,
             num_classes=600,
@@ -34,14 +36,10 @@ class Movinet(PreTrainedApproach):
         self._model = movinet_model.MovinetClassifier(
             backbone=backbone,
             num_classes=14,
+            dropout_rate=self.dropout,
             name=self.__class__.__name__,
         )
         self.model.build(self.input_shape)
-
-        if not self.unfreezing:
-            for layer in self.model.layers[:-1]:
-                layer.trainable = False
-            self.model.layers[-1].trainable = True
 
     def build_only_base(self) -> None:
         backbone = movinet.Movinet(model_id=settings.MOVINET_VERSION.split("_")[1])

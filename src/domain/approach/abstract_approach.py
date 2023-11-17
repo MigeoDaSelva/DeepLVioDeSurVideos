@@ -47,6 +47,7 @@ class Approach(ABC):
             epochs=self.epochs,
             validation_data=validation_ds,
             callbacks=self.callbacks,
+            workers=4,
             use_multiprocessing=True,
             # verbose=0,
         )

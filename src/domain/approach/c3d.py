@@ -112,11 +112,12 @@ class C3D(Approach):
         )(x)
 
         x = keras.layers.LayerNormalization()(x)
+        x = keras.layers.BatchNormalization()(x)
         x = keras.layers.GlobalAveragePooling3D()(x)
         x = keras.layers.Flatten()(x)
 
         x = keras.layers.Dense(4096)(x)
-        x = keras.layers.ReLU()(x)
+        x = keras.layers.Activation("swish")(x)
         x = keras.layers.Dropout(self.dropout)(x)
         x = keras.layers.Dense(4096)(x)
         x = keras.layers.Softmax()(x)

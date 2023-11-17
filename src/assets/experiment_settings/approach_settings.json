@@ -1,13 +1,13 @@
-{   "load_latest_model": true,
+{   "load_latest_model": false,
     "unfreezing": true,
     "approach": "Movinet",
-    "optimizer": "Adagrad",
+    "optimizer": "Adam",
     "activation": "relu",
     "padding": "same",
     "epochs": 200,
     "filters": 32,
-    "dropout": 0.5,
-    "learning_rate": 0.00001,
+    "dropout": 0.3,
+    "learning_rate": 0.0001,
     "kernel_size": [3, 3, 3],
     "pooling_strides": [2, 2, 2],
     "callbacks": {
@@ -25,7 +25,7 @@
         },
         "learning_rate_scheduler": {
             "disabled": false,
-            "starts_at": 14,
+            "starts_at": 9,
             "every": 10
         },
         "plot_losses_keras": {
