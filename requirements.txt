@@ -1,9 +1,9 @@
-tf-models-official
+tf-models-official==2.14
 python-dotenv
 opencv-python
 scikit-learn
 livelossplot
-ipywidgets
+ipywidgets==8.1.1
 tensorflow
 pydocstyle
 ipykernel

@@ -119,7 +119,6 @@ class C3DLSTM(Approach):
 
         x = keras.layers.LayerNormalization()(x)
         x = keras.layers.BatchNormalization()(x)
-        x = keras.layers.GlobalAveragePooling3D()(x)
         x = keras.layers.Flatten()(x)
 
         x = keras.layers.Dense(4096)(x)
