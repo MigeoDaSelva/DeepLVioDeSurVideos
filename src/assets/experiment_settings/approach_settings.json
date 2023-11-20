@@ -1,13 +1,13 @@
 {   "load_latest_model": false,
     "unfreezing": true,
-    "approach": "Movinet",
+    "approach": "Conv2Plus1D",
     "optimizer": "Adam",
     "activation": "relu",
     "padding": "same",
-    "epochs": 200,
+    "epochs": 300,
     "filters": 32,
-    "dropout": 0.3,
-    "learning_rate": 0.0001,
+    "dropout": 0.1,
+    "learning_rate": 0.1,
     "kernel_size": [3, 3, 3],
     "pooling_strides": [2, 2, 2],
     "callbacks": {
@@ -21,12 +21,12 @@
         "early_stopping": {
             "disabled": false,
             "monitor": "val_loss",
-            "patience": 15
+            "patience": 50
         },
         "learning_rate_scheduler": {
             "disabled": false,
-            "starts_at": 9,
-            "every": 10
+            "starts_at": 99,
+            "every": 50
         },
         "plot_losses_keras": {
             "disabled": true

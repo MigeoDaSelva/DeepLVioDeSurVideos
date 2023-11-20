@@ -125,6 +125,9 @@ class C3DLSTM(Approach):
         x = keras.layers.Activation("swish")(x)
         x = keras.layers.Dropout(self.dropout)(x)
         x = keras.layers.Dense(4096)(x)
+        x = keras.layers.Activation("swish")(x)
+        x = keras.layers.Dropout(self.dropout)(x)
+        x = keras.layers.Dense(14)(x)
         x = keras.layers.Softmax()(x)
 
         self._model = keras.Model(
