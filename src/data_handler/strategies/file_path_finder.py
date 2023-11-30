@@ -1,4 +1,3 @@
-"""ler indices armazenar indices."""
 from src.data_handler.abstract_strategies.abstract_file_path_finder import (
     FilePathFinder,
 )

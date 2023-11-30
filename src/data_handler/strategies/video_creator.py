@@ -10,10 +10,6 @@ import cv2 as cv
 
 @dataclass
 class OpenCVVideoCreator(VideoCreator):
-    """
-    Factory Method
-    """
-
     _reader: VideoCapture = field(init=False)
 
     @property
@@ -50,11 +46,6 @@ class OpenCVVideoCreator(VideoCreator):
 
 @dataclass
 class DecordVideoCreator(VideoCreator):
-    """
-    Factory Method
-    anable GPU... Build from source
-    """
-
     _reader: VideoReader = field(init=False)
 
     @property

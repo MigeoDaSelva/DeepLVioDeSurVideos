@@ -14,8 +14,6 @@ import cv2 as cv
 
 @dataclass
 class DeltaFrameBasedVideoCompressor(VideoCompressor):
-    """Temporal Compresion."""
-
     stop_criteria: StopCriteria
     frame_range: int = field(default=3)
 
@@ -96,7 +94,6 @@ class DeltaFrameBasedVideoCompressor(VideoCompressor):
 
 @dataclass
 class UniformVideoCompressor(VideoCompressor):
-
     def compresses(self, frames: List[ndarray]) -> List[ndarray]:
         step = int(len(frames) / self.target_frames)
         for i in range(0, len(frames), step):

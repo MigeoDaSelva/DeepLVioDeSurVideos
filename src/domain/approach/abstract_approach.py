@@ -6,8 +6,6 @@ import tensorflow as tf
 
 @dataclass
 class Approach(ABC):
-    """Adapter pattern"""
-
     epochs: int
     filters: int
     dropout: float

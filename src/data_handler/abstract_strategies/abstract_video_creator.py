@@ -13,10 +13,6 @@ from typing import Union
 
 @dataclass
 class VideoCreator(ABC):
-    """
-    Template Method and Strategy
-    """
-
     video_path: Path = field(init=False)
     required_length: int = field(default=0)
     class_name_finder: ClassNamesFinder = field(default=UniqueClassNamesFinder())
