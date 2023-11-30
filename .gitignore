@@ -167,4 +167,3 @@ src/assets/model_checkpoint/*
 src/assets/model_training_history/*
 src/assets/pre_trained_models/*
 src/assets/violence_detection_datasets/*
-test.ipynb
