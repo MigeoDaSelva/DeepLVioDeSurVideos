@@ -1,0 +1,112 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "DeepLVioDeSurVideos",
+    "build": {
+        "dockerfile": "../docker/Dockerfile",
+        "context": "..",
+        "args": {
+            "USERNAME": "${localEnv:USERNAME}",
+            "USER_UID": "1001",
+            "USER_GID": "1001"
+        }
+    },
+    "runArgs": [
+        "--gpus",
+        "all",
+        "--env-file",
+        "./.devcontainer/env_file.env"
+    ],
+    "mounts": [
+        "source=${localEnv:HOME}/Documentos/Violence Detection Datasets,target=/workspaces/DeepLVioDeSurVideos/src/assets/violence_detection_datasets,type=bind,consistency=cached"
+    ],
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                // Global.
+                "files.autoSave": "afterDelay",
+                // Text editor.
+                "editor.defaultFormatter": "ms-python.black-formatter",
+                "editor.formatOnSave": true,
+                // Python anvronment:
+                "python.defaultInterpreterPath": "/bin/python",
+                // Testing.
+                "python.testing.pytestEnabled": false,
+                "python.testing.unittestEnabled": true,
+                "python.testing.unittestArgs": [
+                    "-v",
+                    "-s",
+                    ".",
+                    "-p",
+                    "*test*.py"
+                ],
+                // Formatter.
+                "black-formatter.interpreter": [
+                    "/bin/python"
+                ],
+                "black-formatter.path": [
+                    "/usr/local/bin/black"
+                ],
+                // Linting, Security and Docstring.
+                "flake8.interpreter": [
+                    "/bin/python"
+                ],
+                "flake8.path": [
+                    "/usr/local/bin/pydocstyle",
+                    "/usr/local/bin/bandit"
+                ],
+                // Type checker.
+                "mypy-type-checker.interpreter": [
+                    "/bin/python"
+                ],
+                "mypy-type-checker.path": [
+                    "/usr/local/bin/mypy"
+                ],
+                // Error and Style linter.
+                "pylint.path": [
+                    "/usr/local/bin/pylint"
+                ],
+                "pylint.interpreter": [
+                    "/bin/python"
+                ],
+                // Jupyter Notebook
+                "notebook.output.textLineLimit": 100
+            },
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.flake8",
+                "ms-python.python",
+                "ms-python.pylint",
+                "redhat.vscode-xml",
+                "redhat.vscode-yaml",
+                "ms-toolsai.jupyter",
+                "dotenv.dotenv-vscode",
+                "grapecity.gc-excelviewer",
+                "msrvida.vscode-sanddance",
+                "ms-python.black-formatter",
+                "ms-azuretools.vscode-docker",
+                "ms-python.mypy-type-checker",
+                "davidanson.vscode-markdownlint"
+
+            ]
+        }
+    },
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    "remoteUser": "${localEnv:USERNAME}",
+    "containerUser": "${localEnv:USERNAME}",
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest"
+        }
+    },
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": {
+        "opencv": "sudo apt update -y && sudo apt install -y python3-opencv"
+    }
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+}

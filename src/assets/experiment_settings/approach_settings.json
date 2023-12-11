@@ -1,0 +1,35 @@
+{   "load_latest_model": false,
+    "unfreezing": false,
+    "approach": "Conv2Plus1D",
+    "optimizer": "SGD",
+    "activation": "relu",
+    "padding": "same",
+    "epochs": 500,
+    "filters": 32,
+    "dropout": 0.1,
+    "learning_rate": 0.01,
+    "kernel_size": [3, 3, 3],
+    "pooling_strides": [2, 2, 2],
+    "callbacks": {
+        "model_checkpoint": {
+            "disabled": false
+        },
+        "csv_logger": {
+            "disabled": false, 
+            "append": true
+        },
+        "early_stopping": {
+            "disabled": false,
+            "monitor": "val_loss",
+            "patience": 50
+        },
+        "learning_rate_scheduler": {
+            "disabled": false,
+            "starts_at": 99,
+            "every": 50
+        },
+        "plot_losses_keras": {
+            "disabled": true
+        }
+    }
+}

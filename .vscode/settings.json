@@ -1,0 +1,50 @@
+{
+    // Global.
+    "files.autoSave": "afterDelay",
+    // Text editor.
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    // Python anvronment:0
+    "python.defaultInterpreterPath": "/bin/python",
+    // Testing.
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "*test*.py"
+    ],
+    // Formatter.
+    "black-formatter.interpreter": [
+        "/bin/python"
+    ],
+    "black-formatter.path": [
+        "/usr/local/bin/black"
+    ],
+    // Linting, Security and Docstring.
+    "flake8.interpreter": [
+        "/bin/python"
+    ],
+    "flake8.path": [
+        "/usr/local/bin/pydocstyle",
+        "/usr/local/bin/bandit"
+    ],
+    // Type checker.
+    "mypy-type-checker.interpreter": [
+        "/bin/python"
+    ],
+    "mypy-type-checker.path": [
+        "/usr/local/bin/mypy"
+    ],
+    // Error and Style linter.
+    "pylint.path": [
+        "/usr/local/bin/pylint"
+    ],
+    "pylint.interpreter": [
+        "/bin/python"
+    ],
+    // Jupyter Notebook
+    "notebook.output.textLineLimit": 100,
+}
