@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-    "name": "DeepLVioDeSurVideos",
+    "name": "MachineLApplVioDeSurVideos",
     "build": {
         "dockerfile": "../docker/Dockerfile",
         "context": "..",
@@ -18,7 +18,7 @@
         "./.devcontainer/env_file.env"
     ],
     "mounts": [
-        "source=${localEnv:HOME}/Documentos/Violence Detection Datasets,target=/workspaces/DeepLVioDeSurVideos/src/assets/violence_detection_datasets,type=bind,consistency=cached"
+        "source=${localEnv:HOME}/Documentos/Violence Detection Datasets,target=/workspaces/MachineLApplVioDeSurVideos/src/assets/violence_detection_datasets,type=bind,consistency=cached"
     ],
     // Configure tool-specific properties.
     "customizations": {
