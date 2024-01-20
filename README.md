@@ -4,6 +4,7 @@
 </table>
 
 <h1>Aprendizado de Máquina Aplicado à Detecção de Violência em Vídeos de Vigilância</h1>
+<p>Projeto ainda em desenvolvimento</p>
 
 <h2>Sobre</h2>
 <p>Nome do repositório: <b>Machine</b> <b>L</b>earning <b>Appl</b>ied to <b>Vio</b>lence <b>De</b>tection in <b>Sur</b>veillance <b>Videos</b> (MachineLApplVioDeSurVideos)</p>
