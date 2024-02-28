@@ -4,7 +4,7 @@
     "optimizer": "SGD",
     "activation": "relu",
     "padding": "same",
-    "epochs": 500,
+    "epochs": 300,
     "filters": 32,
     "dropout": 0.1,
     "learning_rate": 0.01,
@@ -21,7 +21,7 @@
         "early_stopping": {
             "disabled": false,
             "monitor": "val_loss",
-            "patience": 50
+            "patience": 30
         },
         "learning_rate_scheduler": {
             "disabled": false,
