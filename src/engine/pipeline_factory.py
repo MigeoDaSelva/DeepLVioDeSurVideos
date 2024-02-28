@@ -20,14 +20,14 @@ class PipelineFactory:
     ) -> Pipeline:
         train_generator = DataGeneratorFactory.creates(
             path=Path(
-                f"{settings.CROSS_VALIDATION_FILE_PATH}/{simulation_scope_settings.iterations[0]}_{simulation_scope_settings.folds[0]}_train.pickle"
+                f"{settings.CROSS_VALIDATION_PATH}/{simulation_scope_settings.iterations[0]}_{simulation_scope_settings.folds[0]}_train.pickle"
             ),
             data_settings=data_settings,
         )
 
         validation_generator = DataGeneratorFactory.creates(
             path=Path(
-                f"{settings.CROSS_VALIDATION_FILE_PATH}/{simulation_scope_settings.iterations[0]}_{simulation_scope_settings.folds[0]}_validation.pickle"
+                f"{settings.CROSS_VALIDATION_PATH}/{simulation_scope_settings.iterations[0]}_{simulation_scope_settings.folds[0]}_validation.pickle"
             ),
             data_settings=data_settings,
         )

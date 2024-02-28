@@ -1,6 +1,10 @@
+from src.infrastructure.confusion_matrix_repository import ConfusionMatrixRepository
 from src.domain.approach.abstract_approach import Approach
+from tensorflow.keras.metrics import MeanTensor
 from sklearn.metrics import RocCurveDisplay
+from tensorflow.math import round
 import matplotlib.pyplot as plt
+from configs import settings
 from typing import List
 import tensorflow as tf
 import seaborn as sns
@@ -9,9 +13,17 @@ import numpy as np
 
 class GraphicalResultsBuilder:
     @classmethod
-    def build_confusion_matrix(self, approach: Approach, labels: List[str]) -> None:
-        cm = tf.math.confusion_matrix(approach.actual, approach.predicted)
-        ax = sns.heatmap(cm, annot=True, fmt="g")
+    def build_confusion_matrix(self, labels: List[str]) -> None:
+        mean_tensor = MeanTensor()
+
+        for confusion_matrix_file in settings.EXISTING_CONFUSION_MATRIX_FILES:
+            mean_tensor.update_state(
+                ConfusionMatrixRepository.load(confusion_matrix_file)
+            )
+
+        confusion_matrix = tf.cast(round(mean_tensor.result()), tf.int16)
+
+        ax = sns.heatmap(confusion_matrix, annot=True, fmt="g")
         sns.set(rc={"figure.figsize": (35, 35)})
         sns.set(font_scale=5)
         ax.set_xlabel("Ação prevista")
