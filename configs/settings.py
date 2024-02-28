@@ -54,7 +54,7 @@ EXISTING_CROSS_VALIDATION_FILES: list = list(
 
 EXISTING_MODEL_CHECKPOINT: list = list(
     filter(
-        lambda path: path.is_dir() and not path.name.startswith("lite_models"),
+        lambda path: path.is_dir(),
         MODEL_CHECKPOINT_PATH.iterdir(),
     )
 )
