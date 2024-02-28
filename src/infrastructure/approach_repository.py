@@ -1,5 +1,4 @@
 from src.infrastructure.attributes_repository import AttributesRepository
-from src.controller.approach_settings import ApproachSettings
 from src.domain.approach.abstract_approach import Approach
 from dataclasses import dataclass, field
 from configs import settings
@@ -30,11 +29,12 @@ class ApproachRepository(AttributesRepository):
         existing_models = list(
             filter(
                 lambda path: path.match(f"*{approach.model.name}*"),
-                settings.EXISTING_MODEL_CHECKPOINT_FILES,
+                settings.EXISTING_MODEL_CHECKPOINT,
             )
         )
         existing_models.sort()
         existing_models.reverse()
         latest_model_path = existing_models[0]
+        print(latest_model_path.name)
         approach.model.load_weights(latest_model_path)
         return approach

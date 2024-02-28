@@ -2,12 +2,12 @@ from src.data_handler.strategies.class_names_finder import ClassNamesSequentialF
 from sklearn.model_selection import StratifiedShuffleSplit
 from functools import singledispatchmethod
 from dataclasses import dataclass, field
+import configs.settings as settings
 from numpy import array, ndarray
 from typing import List, Union
 from random import shuffle
 from pathlib import Path
 import pickle
-import configs.settings as settings
 import os
 
 
@@ -67,7 +67,7 @@ class DataSplitter:
                 )
 
     def _saves_dataset_fold(self, dataset_fold: ndarray, file_name: str) -> None:
-        cross_val_validation_path = settings.CROSS_VALIDATION_FILE_PATH
+        cross_val_validation_path = settings.CROSS_VALIDATION_PATH
         dataset_fold = self._remove_relative_part(dataset_fold)
         if not os.path.exists(f"{cross_val_validation_path}/"):
             os.makedirs(f"{cross_val_validation_path}/")

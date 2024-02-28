@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from tensorflow import Tensor
 import tensorflow as tf
+import time
 
 
 @dataclass
@@ -23,6 +24,7 @@ class Approach(ABC):
     _history: tf.keras.callbacks.History = field(init=False)
     _actual: Tensor = field(init=False)
     _predicted: Tensor = field(init=False)
+    _prediction_time: float = field(init=False)
 
     def __post_init__(self) -> None:
         self.metrics = [
@@ -51,9 +53,17 @@ class Approach(ABC):
         )
 
     def evaluate(self, test_ds: tf.data.Dataset) -> None:
+
+        if tf.config.list_physical_devices("GPU"):
+            tf.config.experimental.reset_memory_stats("GPU:0")
+
+        start = time.perf_counter()
+
         self.model.evaluate(test_ds, return_dict=True)
         actual = [labels for _, labels in test_ds.unbatch()]
         predicted = self.model.predict(test_ds)
+
+        self._prediction_time = time.perf_counter() - start
 
         actual = tf.stack(actual, axis=0)
         predicted = tf.concat(predicted, axis=0)
@@ -68,6 +78,10 @@ class Approach(ABC):
     @property
     def predicted(self) -> Tensor:
         return self._predicted
+
+    @property
+    def prediction_time(self) -> float:
+        return self._prediction_time
 
     @property
     def model(self) -> tf.keras.Model:

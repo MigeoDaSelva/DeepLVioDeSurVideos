@@ -36,19 +36,42 @@ MOVINET_URL: str = str(os.environ.get("MOVINET_URL")).replace(
 )
 
 # Path definitions
-CLASSIFICATION_METRICS: Path = _decides_source("CLASSIFICATION_METRICS")
-CROSS_VALIDATION_FILE_PATH: Path = _decides_source("CROSS_VALIDATION_FILE_PATH")
 IMAGES_PATH: Path = _decides_source("IMAGES_PATH")
-MODEL_CHECKPOINT_PATH: Path = _decides_source("MODEL_CHECKPOINT_PATH")
-MODEL_TRAINING_HISTORY_PATH: Path = _decides_source("MODEL_TRAINING_HISTORY_PATH")
-PRE_TRAINED_MODELS_PATH: Path = _decides_source("PRE_TRAINED_MODELS_PATH")
 DATASETS_PATH: Path = _decides_source("DATASETS_PATH")
-PRE_TRAINED_CHECKPOINT_PATH: Path = Path(
-    f"{PRE_TRAINED_MODELS_PATH}/{os.environ.get('MOVINET_VERSION')}"
+MODEL_CHECKPOINT_PATH: Path = _decides_source("MODEL_CHECKPOINT_PATH")
+CROSS_VALIDATION_PATH: Path = _decides_source("CROSS_VALIDATION_PATH")
+CONFUSION_MATRIX_PATH: Path = _decides_source("CONFUSION_MATRIX_PATH")
+CLASSIFICATION_METRICS: Path = _decides_source("CLASSIFICATION_METRICS")
+MODEL_TRAINING_HISTORY_PATH: Path = _decides_source("MODEL_TRAINING_HISTORY_PATH")
+
+
+EXISTING_CROSS_VALIDATION_FILES: list = list(
+    filter(
+        lambda path: not path.name.startswith("."),
+        CROSS_VALIDATION_PATH.glob("*.*"),
+    )
 )
 
-EXISTING_CROSS_VALIDATION_FILES: list = list(CROSS_VALIDATION_FILE_PATH.glob("*.*"))
-EXISTING_MODEL_CHECKPOINT_FILES: list = list(MODEL_CHECKPOINT_PATH.glob("*.*"))
+EXISTING_MODEL_CHECKPOINT: list = list(
+    filter(
+        lambda path: path.is_dir() and not path.name.startswith("lite_models"),
+        MODEL_CHECKPOINT_PATH.iterdir(),
+    )
+)
+
+EXISTING_CONFUSION_MATRIX_FILES: list = list(
+    filter(
+        lambda path: not path.name.startswith("."),
+        CONFUSION_MATRIX_PATH.glob("*.*"),
+    )
+)
+
+EXISTING_CLASSIFICATION_METRICS: list = list(
+    filter(
+        lambda path: "average" not in path.name and not path.name.startswith("."),
+        CLASSIFICATION_METRICS.glob("*.*"),
+    )
+)
 
 # Default setting files
 DATA_SETTINGS_FILE: Path = Path(
