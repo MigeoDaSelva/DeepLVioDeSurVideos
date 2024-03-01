@@ -135,3 +135,6 @@ class C3DLSTM(Approach):
             x,
             name=self.__class__.__name__,
         )
+
+        if self.continue_training:
+            self.load_weights()

@@ -19,6 +19,7 @@ class ApproachFactory:
             dropout=approach_settings.dropout,
             padding=approach_settings.padding,
             callbacks=approach_settings.callbacks,
+            unfreezing=approach_settings.unfreezing,
             input_shape=(
                 None,
                 data_settings.n_frames,
@@ -29,6 +30,7 @@ class ApproachFactory:
             kernel_size=approach_settings.kernel_size,
             conv_activation=approach_settings.activation,
             pooling_strides=approach_settings.pooling_strides,
+            continue_training=approach_settings.continue_training,
             loss=SparseCategoricalCrossentropy(
                 # from_logits=True,
             ),

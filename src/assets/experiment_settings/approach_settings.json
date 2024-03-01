@@ -1,4 +1,4 @@
-{   "load_latest_model": false,
+{   "continue_training": false,
     "unfreezing": false,
     "approach": "Conv2Plus1D",
     "optimizer": "SGD",

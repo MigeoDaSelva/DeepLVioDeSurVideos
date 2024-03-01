@@ -1,7 +1,7 @@
 from src.infrastructure.attributes_repository import AttributesRepository
-from src.domain.approach.abstract_approach import Approach
 from dataclasses import dataclass, field
 from configs import settings
+from pathlib import Path
 import json
 
 
@@ -25,16 +25,16 @@ class ApproachRepository(AttributesRepository):
         pass
 
     @classmethod
-    def loads_latest_model_checkpoint(self, approach: Approach) -> Approach:
+    def gets_best_model_checkpoint(self, model_name: str) -> Path:
         existing_models = list(
             filter(
-                lambda path: path.match(f"*{approach.model.name}*"),
+                lambda path: path.match(f"*{model_name}*"),
                 settings.EXISTING_MODEL_CHECKPOINT,
             )
         )
-        existing_models.sort()
-        existing_models.reverse()
+        existing_models = sorted(
+            existing_models, key=lambda path: path.name.split("-")[-1]
+        )
         latest_model_path = existing_models[0]
         print(latest_model_path.name)
-        approach.model.load_weights(latest_model_path)
-        return approach
+        return latest_model_path

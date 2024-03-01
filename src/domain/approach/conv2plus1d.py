@@ -50,3 +50,6 @@ class Conv2Plus1D(Approach):
             x,
             name=self.__class__.__name__,
         )
+
+        if self.continue_training:
+            self.load_weights()

@@ -22,5 +22,5 @@ class ExecutionApplication:
         )
 
     @classmethod
-    def load_latest_model(self, approach: Approach) -> Approach:
-        return ApproachRepository.loads_latest_model_checkpoint(approach)
+    def load_best_model(self, approach: Approach) -> None:
+        approach.load_weights()

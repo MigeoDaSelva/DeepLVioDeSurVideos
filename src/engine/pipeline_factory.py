@@ -31,16 +31,10 @@ class PipelineFactory:
             ),
             data_settings=data_settings,
         )
+
         approach = ApproachFactory.creates(
             data_settings=data_settings, approach_settings=approach_settings
         )
-
-        if approach_settings.load_latest_model:
-            approach.unfreezing = approach_settings.unfreezing
-            approach.build_only_base()
-            approach = ApproachRepository.loads_latest_model_checkpoint(
-                approach=approach
-            )
 
         dataset_factory = DatasetFactory(
             batch_size=data_settings.batch_size,
@@ -48,7 +42,6 @@ class PipelineFactory:
         )
 
         return Pipeline(
-            build_model=not approach_settings.load_latest_model,
             approach=approach,
             train_dataset=train_generator,
             validation_dataset=validation_generator,

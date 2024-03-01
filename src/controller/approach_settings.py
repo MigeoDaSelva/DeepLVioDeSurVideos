@@ -48,7 +48,7 @@ class ApproachSettings(SettingController):
         init=False,
     )
 
-    load_latest_model_checkbox: Checkbox = field(
+    continue_training_checkbox: Checkbox = field(
         init=False,
     )
 
@@ -94,8 +94,8 @@ class ApproachSettings(SettingController):
     )
 
     @property
-    def load_latest_model(self) -> bool:
-        return self.load_latest_model_checkbox.value
+    def continue_training(self) -> bool:
+        return self.continue_training_checkbox.value
 
     @property
     def unfreezing(self) -> bool:
@@ -212,9 +212,9 @@ class ApproachSettings(SettingController):
         self.unfreezing_checkbox.disabled = not change["new"]
 
     def build(self) -> None:
-        self.load_latest_model_checkbox = Checkbox(
-            value=self.default_values.get("load_latest_model"),
-            description="Load last model checkpoint",
+        self.continue_training_checkbox = Checkbox(
+            value=self.default_values.get("continue_training"),
+            description="Load best model checkpoint",
             disabled=False,
             indent=False,
         )
@@ -224,11 +224,11 @@ class ApproachSettings(SettingController):
             disabled=True,
         )
 
-        self.load_latest_model_checkbox.observe(self._on_value_change, names="value")
+        self.continue_training_checkbox.observe(self._on_value_change, names="value")
 
         self.load_model_container = VBox(
             children=[
-                self.load_latest_model_checkbox,
+                self.continue_training_checkbox,
                 self.unfreezing_checkbox,
             ],
             disabled=False,

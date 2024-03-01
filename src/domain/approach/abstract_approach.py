@@ -1,3 +1,4 @@
+from src.infrastructure.approach_repository import ApproachRepository
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from tensorflow import Tensor
@@ -12,10 +13,12 @@ class Approach(ABC):
     dropout: float
     padding: tuple
     callbacks: list
+    unfreezing: bool
     input_shape: tuple
     kernel_size: tuple
     conv_activation: str
     pooling_strides: tuple
+    continue_training: bool
     loss: tf.keras.losses.Loss
     optimizer: tf.keras.optimizers.Optimizer
     metrics: list = field(init=False)
@@ -35,6 +38,11 @@ class Approach(ABC):
     @abstractmethod
     def build(self) -> None:
         pass
+
+    def load_weights(self) -> None:
+        self.model.load_weights(
+            ApproachRepository.gets_best_model_checkpoint(self.model.name)
+        )
 
     def compile(self) -> None:
         self.model.compile(
