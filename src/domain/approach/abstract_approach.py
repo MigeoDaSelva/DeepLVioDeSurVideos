@@ -23,7 +23,7 @@ class Approach(ABC):
     optimizer: tf.keras.optimizers.Optimizer
     metrics: list = field(init=False)
 
-    _model: tf.keras.Model = field(init=False)
+    _model: tf.keras.Model = field(default=None)
     _history: tf.keras.callbacks.History = field(init=False)
     _actual: Tensor = field(init=False)
     _predicted: Tensor = field(init=False)
@@ -42,9 +42,10 @@ class Approach(ABC):
     def load_weights(self) -> None:
         if not self.model:
             self.build()
-        self.model.load_weights(
-            ApproachRepository.gets_best_model_checkpoint(self.model.name)
-        )
+        else:
+            self.model.load_weights(
+                ApproachRepository.gets_best_model_checkpoint(self.model.name)
+            )
 
     def compile(self) -> None:
         self.model.compile(
