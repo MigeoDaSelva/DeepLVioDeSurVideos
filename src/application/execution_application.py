@@ -24,3 +24,4 @@ class ExecutionApplication:
     @classmethod
     def load_best_model(self, approach: Approach) -> None:
         approach.load_weights()
+        approach.compile()
