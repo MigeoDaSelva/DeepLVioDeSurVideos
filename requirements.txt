@@ -1,4 +1,4 @@
-tf-models-official==2.14
+tf-models-official
 python-dotenv
 opencv-python
 scikit-learn
