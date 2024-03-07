@@ -5,7 +5,7 @@ from pathlib import Path
 
 class MetricsRepository:
     @classmethod
-    def write(self, file_name: str, metrics: dict) -> DataFrame:
+    def write(self, file_name: str, metrics: dict) -> None:
         for metric in metrics:
             item = {}
             current_file_name = file_name.replace("metric", metric)

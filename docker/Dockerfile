@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:latest-gpu
+FROM tensorflow/tensorflow:latest-gpu-jupyter
 
 ARG USERNAME
 ARG USER_UID

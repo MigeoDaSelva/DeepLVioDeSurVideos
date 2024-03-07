@@ -8,7 +8,6 @@ from abc import ABC, abstractmethod
 from src.domain.video import Video
 from random import randint
 from pathlib import Path
-from typing import Union
 
 
 @dataclass
@@ -56,7 +55,6 @@ class VideoCreator(ABC):
 
     def _completes_length(self, frames: ndarray) -> ndarray:
         augmentation_approaches = [fliplr, flipud]
-        initial_length = len(frames)
 
         while len(frames) < self.required_length:
             frame_index = randint(0, len(frames) - 1)

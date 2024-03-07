@@ -10,8 +10,8 @@ import tensorflow as tf
 
 class Movinet(Approach):
     def build(self) -> None:
-        if not (settings.MODEL_CHECKPOINT_PATH / settings.MOVINET_VERSION).exists():
-            Downloader.download_movinet()
+        tf.keras.backend.clear_session()
+
         backbone = movinet.Movinet(model_id=settings.MOVINET_VERSION.split("_")[1])
 
         backbone.trainable = self.unfreezing
@@ -20,8 +20,11 @@ class Movinet(Approach):
             backbone=backbone,
             num_classes=600,
         )
+        
+        model.build([None, None, None, None, self.input_shape[4]])
 
-        model.build(self.input_shape)
+        if not (settings.MODEL_CHECKPOINT_PATH / settings.MOVINET_VERSION).exists():
+            Downloader.download_movinet()
 
         checkpoint_path = tf.train.latest_checkpoint(
             settings.MODEL_CHECKPOINT_PATH / settings.MOVINET_VERSION
